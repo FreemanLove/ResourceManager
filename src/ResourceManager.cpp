@@ -1,50 +1,70 @@
-#include "ResourceManager.h"
+#include "ResourceManager/ResourceManager.h"
 
-namespace sfrm
+sf::Font &ResourceManager::getFont(string filename)
 {
-	sf::Texture &ResourceManager::getTexture(string filename)
+	auto it=fonts_.find(filename);
+	if(it!=fonts_.end())
 	{
-		auto it=textures_.find(filename);
-		if(it!=textures_.end())
+		return it->second;
+	}
+	else
+	{
+		sf::Font font;
+		if(font.loadFromFile(filename))
 		{
-			return it->second;
+			fonts_.insert(pair<string, sf::Font>(filename, font));
 		}
-		else
-		{
-			sf::Texture texture;
-			if(texture.loadFromFile(filename))
-			{
-				textures_.insert(pair<string, sf::Texture>(filename, texture));
-			}
-			return textures_[filename];
-		}	
-	}
+		return fonts_[filename];
+	}	
+}
 
-	void ResourceManager::removeTexture(string filename)
-	{
-		textures_.erase(filename);
-	}
+void ResourceManager::removeFont(string filename)
+{
+	fonts_.erase(filename);
+}
 
-	sf::SoundBuffer &ResourceManager::getSoundBuffer(string filename)
+sf::Texture &ResourceManager::getTexture(string filename)
+{
+	auto it=textures_.find(filename);
+	if(it!=textures_.end())
 	{
-		auto it=sounds_.find(filename);
-		if(it!=sounds_.end())
+		return it->second;
+	}
+	else
+	{
+		sf::Texture texture;
+		if(texture.loadFromFile(filename))
 		{
-			return it->second;
+			textures_.insert(pair<string, sf::Texture>(filename, texture));
 		}
-		else
-		{
-			sf::SoundBuffer sound;
-			if(sound.loadFromFile(filename))
-			{
-				sounds_.insert(pair<string, sf::SoundBuffer>(filename, sound));
-			}
-			return sounds_[filename];
-		}	
-	}
+		return textures_[filename];
+	}	
+}
 
-	void ResourceManager::removeSoundBuffer(string filename)
+void ResourceManager::removeTexture(string filename)
+{
+	textures_.erase(filename);
+}
+	
+sf::SoundBuffer &ResourceManager::getSoundBuffer(string filename)
+{
+	auto it=sounds_.find(filename);
+	if(it!=sounds_.end())
 	{
-		sounds_.erase(filename);
+		return it->second;
 	}
+	else
+	{
+		sf::SoundBuffer sound;
+		if(sound.loadFromFile(filename))
+		{
+			sounds_.insert(pair<string, sf::SoundBuffer>(filename, sound));
+		}
+		return sounds_[filename];
+	}	
+}
+
+void ResourceManager::removeSoundBuffer(string filename)
+{
+	sounds_.erase(filename);
 }

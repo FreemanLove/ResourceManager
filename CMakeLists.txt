@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(sfrm)
+project(ResourceManager)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 
-set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS "-std=c++11 -g")
 
 find_package(SFML REQUIRED COMPONENTS graphics window system audio)
 
@@ -24,5 +24,5 @@ foreach(FOLDER ${FOLDERS})
 	set(EXECUTABLES ${EXECUTABLES} ${GLOBFILES})
 endforeach(FOLDER)
 
-add_library(sfrm SHARED ${EXECUTABLES})
-target_link_libraries(sfrm ${LIBRARIES})
+add_library(ResourceManager SHARED ${EXECUTABLES})
+target_link_libraries(ResourceManager ${LIBRARIES})
