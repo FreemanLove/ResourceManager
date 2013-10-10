@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(ResourceManager)
+project(germ)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 
@@ -24,5 +24,5 @@ foreach(FOLDER ${FOLDERS})
 	set(EXECUTABLES ${EXECUTABLES} ${GLOBFILES})
 endforeach(FOLDER)
 
-add_library(ResourceManager SHARED ${EXECUTABLES})
-target_link_libraries(ResourceManager ${LIBRARIES})
+add_library(germ SHARED ${EXECUTABLES})
+target_link_libraries(germ ${LIBRARIES})
